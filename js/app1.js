@@ -1,36 +1,38 @@
-//使用let声明变量
-let task = [];
-let currentFiles = "all";
+const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
+const taskList = document.getElementById('taskList');
+let tasks = [
+    {
+        text:"ffff4",createdAt: new Date(2025,1,14),
+    },{
+        text:"7767764",createdAt: new Date(2025,1,16),
+    }
+];
 
-//使用const声明变量
-const taskList = document.getElementById("taskList");
-const addBtn = document.getElementById("addBtn");
-const tastInput = document.getElementById("taskInput");
-const statusElement = document.getElementById("status");
-
-const defaultTaskCount = 0;
-const defaultCompletionRate =  0;
-
-const appNAme = "任务管理系统";
-const appVersion = "1.0.0";
-const appAuthor = "";
+function update() {
+    taskList.innerHTML =
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        span.className ='task-text';
+        span.textcontent = task.text;
+        li.appendChild(span);
+        taskList.appendChild(li);
+    })
+}
 
 function addTask() {
-    const currentTaskCount = task.length + 1;
-    if (tastInput.value === "") {
-        alert("任务不能为空");
-    } 
-    if (){}
-    
-    const newTask = {
-        id: DataTransfer.now(),
-        text: tastInput.value,
-        completed: false,
-        creatAt: new Date(),
-       
+    if(!taskInput.value) {
+    alert('Please enter a task');
+    return;
     }
-    
-    task.push(newTask);
-    taskInput.value = "";
-
+    const newtask = {
+        text:taskInput.value,
+        createdAt: new Date(),
+    };
+    tasks.push(newtask);
+    taskInput.value = '';
+    update()
 }
+    addBtn.addEventListener('click',addTask);
+    update()
